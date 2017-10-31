@@ -13,11 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.bh.android.bhskyscan.data.Itinerary;
 
 import java.util.ArrayList;
@@ -80,12 +75,6 @@ public class FlightListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        // Instantiate the cache
-        Cache cache = new DiskBasedCache(this.getContext().getCacheDir(), 1024 * 1024); // 1MB cap
-
-        // Set up the network to use HttpURLConnection as the HTTP client.
-        Network network = new BasicNetwork(new HurlStack());
 
         if (DBG) Log.v(LOG_TAG, "--- onCreate ---");
     }
