@@ -10,8 +10,6 @@
 	<img src="images/video_for_demo.png">
 </a>
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/nZMlruNDbLsxEu" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/BingHuanLin/project-bh-skyscan-81430689" title="Project: BH SkyScan" target="_blank">Project: BH SkyScan</a> </strong> from <strong><a href="https://www.slideshare.net/BingHuanLin" target="_blank">Lin BH</a></strong> </div>
-
 <img src="images/Slide01.png">
 <img src="images/Slide02.png">
 <img src="images/Slide03.png">
