@@ -13,17 +13,15 @@ import java.io.InputStream;
  * Created by binghuan on 31/10/2017.
  */
 
-public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
     private final boolean DBG = true;
     private final String TAG = "BH_ImageDownloader";
 
 
-    final ImageView imageview;
-    private Context mContext = null;
+    private final ImageView imageview;
 
     public ImageDownloader(Context context, ImageView view) {
-        mContext = context;
         this.imageview = view;
     }
 

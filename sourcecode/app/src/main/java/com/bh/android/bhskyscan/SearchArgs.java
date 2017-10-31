@@ -9,25 +9,25 @@ import java.util.Map;
  * Created by BH_Lin on 30/10/2017.
  */
 
-public class SearchArgs {
-    public final static String COUNTRY = "country";
-    public final static String CURRENCY = "currency";
-    public final static String LOCALE = "locale";
-    public final static String ORIGIN_PLACE = "originPlace";
-    public final static String DESTINATION_PLACE = "destinationPlace";
-    public final static String OUTBOUND_DATE = "outboundDate";
-    public final static String INBOUND_DATE = "inboundDate";
-    public final static String ADULTS = "adults";
-    public final static String APIKEY = "apikey";
+class SearchArgs {
+    private final static String COUNTRY = "country";
+    private final static String CURRENCY = "currency";
+    private final static String LOCALE = "locale";
+    private final static String ORIGIN_PLACE = "originPlace";
+    private final static String DESTINATION_PLACE = "destinationPlace";
+    private final static String OUTBOUND_DATE = "outboundDate";
+    private final static String INBOUND_DATE = "inboundDate";
+    private final static String ADULTS = "adults";
+    private final static String APIKEY = "apikey";
 
-    String country;
-    String currency;
-    String locale;
-    String originPlace;
-    String destinationPlace;
+    private String country;
+    private String currency;
+    private String locale;
+    private String originPlace;
+    private String destinationPlace;
     String outboundDate;
     String inboundDate;
-    int adults;
+    private int adults;
     String apikey;
 
     public void setupDefaultArgs() {
@@ -44,7 +44,7 @@ public class SearchArgs {
 
     public String getRequestString() {
 
-        String requestBody = "";
+        String requestBody;
 
         requestBody = COUNTRY + "=" + this.country +
                 "&" + CURRENCY + "=" + this.currency +
@@ -61,11 +61,10 @@ public class SearchArgs {
     }
 
     public JSONObject getParametersJSONObj() {
-        JSONObject parametersJsonObj = new JSONObject(this.getParametersMap());
-        return parametersJsonObj;
+        return new JSONObject(this.getParametersMap());
     }
 
-    public Map<String,String> getParametersMap() {
+    private Map<String,String> getParametersMap() {
         Map<String,String> params = new HashMap<String, String>();
         params.put(SearchArgs.COUNTRY,this.country);
         params.put(SearchArgs.CURRENCY,this.currency);

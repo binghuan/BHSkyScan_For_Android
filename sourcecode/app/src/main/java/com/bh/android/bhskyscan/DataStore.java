@@ -14,10 +14,8 @@ import org.json.JSONObject;
 
 public class DataStore {
 
-    public final String TAG = "BH_SR_" + this.getClass().getSimpleName();
+    private final String TAG = "BH_SR_" + this.getClass().getSimpleName();
     private final static boolean DBG = true;
-
-    private Context mContext = null;
 
     private final String KEY_DATA_PREFERENCE = "private_data";
 
@@ -25,17 +23,17 @@ public class DataStore {
     private final String KEY_FB_TOKEN = "FBTOKEN";
     private final String KEY_FB_GENDER = "FB_GEMDER";
     private final String KEY_FB_FIRST_NAME = "FB_FIRST_NAME";
-    public static final String KEY_FB_EMAIL = "FB_EMAIL";
+    private static final String KEY_FB_EMAIL = "FB_EMAIL";
     private final String KEY_FB_BIRTHDAY = "FB_BIRTHDAY";
     private final String KEY_USER_PROFILE = "KEY_USER_PROFILE";
-    public final static String KEY_ENCRYPTED_MEMBER_ID = "MEMBERID";
-    public final static String KEY_RAW_MEMBER_ID = "MEMBERID_RAW";
+    private final static String KEY_ENCRYPTED_MEMBER_ID = "MEMBERID";
+    private final static String KEY_RAW_MEMBER_ID = "MEMBERID_RAW";
 
-    public final static String KEY_SEARCH_RECORD = "SEARCH_RECORD";
-    public final static String KEY_LIKE_SERVER_DEFAULT = "LIKE_SERVER_DEFAULT";
+    private final static String KEY_SEARCH_RECORD = "SEARCH_RECORD";
+    private final static String KEY_LIKE_SERVER_DEFAULT = "LIKE_SERVER_DEFAULT";
 
-    public final static String KEY_LIKE_SETTINGS = "LIKE_SETTING";
-    public final static String KEY_SEARCH_SERVER_DEFAULT = "SEARCH_SERVER_DEFAULT";
+    private final static String KEY_LIKE_SETTINGS = "LIKE_SETTING";
+    private final static String KEY_SEARCH_SERVER_DEFAULT = "SEARCH_SERVER_DEFAULT";
 
     // for Google Play install referrer.
     private final String KEY_INSTALL_REFERRER = "referrer";
@@ -83,14 +81,13 @@ public class DataStore {
     }
 
     public void setFBEmail(String value) {
-        mPrefEditor.putString(KEY_FB_EMAIL, value.toString()).apply();
+        mPrefEditor.putString(KEY_FB_EMAIL, value).apply();
         if(DBG) Log.d(TAG, "@@@@@@@>> setFBEmail: " + value);
     }
 
     public String getFBEmail() {
         JSONObject value = null;
-        String email = mSharedPreferences.getString(KEY_FB_EMAIL, null);
-        return email;
+        return mSharedPreferences.getString(KEY_FB_EMAIL, null);
     }
 
 
@@ -141,7 +138,7 @@ public class DataStore {
         JSONObject value = null;
         String jsonString = mSharedPreferences.getString(KEY_LIKE_SETTINGS, null);
 
-        if(jsonString != null && jsonString.equals("") != true) {
+        if(jsonString != null && !jsonString.equals("")) {
             try {
                 value = new JSONObject(jsonString);
             } catch (JSONException e) {
@@ -175,10 +172,8 @@ public class DataStore {
 
     public DataStore(Context context) {
 
-        mContext = context;
-
         if(mSharedPreferences == null) {
-            mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         }
 
         if(mPrefEditor == null) {
@@ -221,7 +216,7 @@ public class DataStore {
         mPrefEditor.putString(KEY_USER_PROFILE, value).apply();
     }
 
-    public String getUserProfile() {
+    private String getUserProfile() {
         String value;
         value = mSharedPreferences.getString(KEY_USER_PROFILE, null);
         if(DBG) Log.d(TAG, ">> getUserProfile: " + value);

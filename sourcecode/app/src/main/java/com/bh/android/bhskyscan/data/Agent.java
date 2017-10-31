@@ -4,7 +4,7 @@ package com.bh.android.bhskyscan.data;
  * Created by binghuan on 31/10/2017.
  */
 
-public class Agent {
+class Agent {
     public static final String BOOKING_NUMBER = "BookingNumber";
     public static final String ID = "Id";
     public static final String IMAGE_URL = "ImageUrl";

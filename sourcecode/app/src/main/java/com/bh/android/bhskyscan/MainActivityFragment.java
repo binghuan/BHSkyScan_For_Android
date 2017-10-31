@@ -43,16 +43,16 @@ public class MainActivityFragment extends Fragment {
         }
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mStartDateButton = (Button) view.findViewById(R.id.btn_start_date);
+        mStartDateButton = view.findViewById(R.id.btn_start_date);
         mStartDateButton.setOnClickListener(new DateClickListener(mStartTime));
-        mEndDateButton = (Button) view.findViewById(R.id.btn_end_date);
+        mEndDateButton = view.findViewById(R.id.btn_end_date);
         mEndDateButton.setOnClickListener(new DateClickListener(mEndTime));
 
         return view;
     }
 
     private class DateClickListener implements View.OnClickListener {
-        private Time mTime;
+        private final Time mTime;
 
         public DateClickListener(Time time) {
             mTime = time;

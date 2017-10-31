@@ -18,5 +18,5 @@ public class Itinerary {
     public BoundLeg inboundLeg;
     public BoundLeg outboundLeg;
 
-    public ArrayList<PricingOption> pricingOptions = new ArrayList<PricingOption>();
+    public final ArrayList<PricingOption> pricingOptions = new ArrayList<PricingOption>();
 }

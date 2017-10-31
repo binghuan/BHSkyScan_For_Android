@@ -34,24 +34,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by binghuan on 1/13/15.
  */
-public class DataRequester {
+class DataRequester {
 
-    public final String TAG = "BH_SR_" + this.getClass().getSimpleName();
-    public static final boolean DBG = true;
-    private DataStore mDataStore = null;
+    private final String TAG = "BH_SR_" + this.getClass().getSimpleName();
+    private static final boolean DBG = true;
     private File tempFile = null;
 
     public String sessionKey = null;
 
-    public Bitmap mBitmap2Upload = null;
+    private final Bitmap mBitmap2Upload = null;
 
-    public JSONObject extraHeaders = null;
+    private final JSONObject extraHeaders = null;
 
-    DataCallback mCallback;
+    private DataCallback mCallback;
 
     private Context mContext = null;
     private JSONObject mInputData = null;
@@ -59,7 +59,7 @@ public class DataRequester {
 
     public DataRequester(Context context) {
         mContext = context;
-        mDataStore = new DataStore(context);
+        DataStore mDataStore = new DataStore(context);
     }
 
     private String getResult() {
@@ -96,19 +96,19 @@ public class DataRequester {
         new HttpAsyncTask().execute(url, String.valueOf(METHOD_DELETE));
     }
 
-    public void httpGet(String url, JSONObject data, DataCallback callback) {
+    public void httpGet(String url, DataCallback callback) {
 
         if (DBG) Log.v(TAG, "###> httpGet: " + url);
 
-        mInputData = data;
+        mInputData = null;
         mCallback = callback;
         new HttpAsyncTask().execute(url, String.valueOf(METHOD_GET));
     }
 
-    public static final int METHOD_GET = 1;
-    public static final int METHOD_PUT = 2;
-    public static final int METHOD_POST = 3;
-    public static final int METHOD_DELETE = 4;
+    private static final int METHOD_GET = 1;
+    private static final int METHOD_PUT = 2;
+    private static final int METHOD_POST = 3;
+    private static final int METHOD_DELETE = 4;
 
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
@@ -157,7 +157,7 @@ public class DataRequester {
 
             if (mCallback != null) {
                 if (DBG) Log.d(TAG, "Ready to issue callback event");
-                if ((tempFile != null) && tempFile.exists() == true) {
+                if ((tempFile != null) && tempFile.exists()) {
                     tempFile.delete();
                     if (DBG) Log.d(TAG, "tempfile: " + tempFile.getAbsolutePath() + " has been " +
                             "deleted!");
@@ -180,7 +180,7 @@ public class DataRequester {
 
         if (DBG) Log.d(TAG, "#>> GET: " + url);
 
-        InputStream inputStream = null;
+        InputStream inputStream;
         String result = "";
         try {
 
@@ -189,7 +189,7 @@ public class DataRequester {
             // BH_Lin@20150122 -------------------------------------------------------------------->
             // purpose: iterate jsonObject to append query string to URL
 
-            String newUrl = url;
+            StringBuilder newUrl = new StringBuilder(url);
 
             // 4. convert JSONObject to JSON to String
             if (jsonObject != null) {
@@ -200,20 +200,20 @@ public class DataRequester {
                     try {
                         String value = (String) jsonObject.get(key);
 
-                        if (newUrl.toLowerCase().indexOf("?") == -1) {
-                            newUrl += "?" + key + "=" + value;
+                        if (newUrl.toString().toLowerCase().indexOf("?") == -1) {
+                            newUrl.append("?").append(key).append("=").append(value);
                         } else {
-                            newUrl += "&" + key + "=" + value;
+                            newUrl.append("&").append(key).append("=").append(value);
                         }
 
-                    } catch (JSONException e) {
+                    } catch (JSONException ignored) {
 
                     }
                 }
 
             }
 
-            HttpGet httpGet = new HttpGet(newUrl);
+            HttpGet httpGet = new HttpGet(newUrl.toString());
             if (DBG) Log.d(TAG, "### query URL: " + newUrl);
 
             // 7. Set some headers to inform server about the type of the content
@@ -233,7 +233,7 @@ public class DataRequester {
                         if (DBG) Log.d(TAG, "@### showHead: " + key + " = value ___" + value +
                                 "___");
 
-                    } catch (JSONException e) {
+                    } catch (JSONException ignored) {
 
                     }
                 }
@@ -268,7 +268,7 @@ public class DataRequester {
     private String DELETE(String url, JSONObject jsonObject) {
         if (DBG) Log.d(TAG, "#>> GET: " + url);
 
-        InputStream inputStream = null;
+        InputStream inputStream;
         String result = "";
         try {
 
@@ -277,7 +277,7 @@ public class DataRequester {
             // BH_Lin@20150122 -------------------------------------------------------------------->
             // purpose: iterate jsonObject to append query string to URL
 
-            String newUrl = url;
+            StringBuilder newUrl = new StringBuilder(url);
 
             // 4. convert JSONObject to JSON to String
             if (jsonObject != null) {
@@ -288,20 +288,20 @@ public class DataRequester {
                     try {
                         String value = (String) jsonObject.get(key);
 
-                        if (newUrl.toLowerCase().indexOf("?") == -1) {
-                            newUrl += "?" + key + "=" + value;
+                        if (newUrl.toString().toLowerCase().indexOf("?") == -1) {
+                            newUrl.append("?").append(key).append("=").append(value);
                         } else {
-                            newUrl += "&" + key + "=" + value;
+                            newUrl.append("&").append(key).append("=").append(value);
                         }
 
-                    } catch (JSONException e) {
+                    } catch (JSONException ignored) {
 
                     }
                 }
 
             }
 
-            HttpDelete httpDelete = new HttpDelete(newUrl);
+            HttpDelete httpDelete = new HttpDelete(newUrl.toString());
             if (DBG) Log.d(TAG, "### query URL: " + newUrl);
 
             // 7. Set some headers to inform server about the type of the content
@@ -337,7 +337,7 @@ public class DataRequester {
 
         if (DBG) Log.d(TAG, "#>> PUT: " + url);
 
-        InputStream inputStream = null;
+        InputStream inputStream;
         String result = "";
         try {
 
@@ -346,16 +346,16 @@ public class DataRequester {
 
             String json = "";
 
-            StringEntity se = null;
-            FileEntity fileEntity = null;
+            StringEntity se;
+            FileEntity fileEntity;
             // 4. convert JSONObject to JSON to String
 
-            String contentUriString = "";
+            String contentUriString;
 
             if (jsonObject != null) {
                 json = jsonObject.toString();
 
-                Uri contentUri = null;
+                Uri contentUri;
                 Bitmap photo = null;
 
                 if (mBitmap2Upload != null) {
@@ -377,7 +377,7 @@ public class DataRequester {
                 photo.compress(Bitmap.CompressFormat.JPEG, 98, baos);
                 byte[] byteArrayImage = baos.toByteArray();
 
-                String newFileName = "SR" + MyUtils.getRandomString(10) + "photo.jpg";
+                String newFileName = "SR" + MyUtils.getRandomString() + "photo.jpg";
                 tempFile = new File(Environment.getExternalStorageDirectory(), newFileName);
                 if (DBG) Log.d(TAG, "### temporary file: " + tempFile.getAbsolutePath());
 
@@ -439,7 +439,7 @@ public class DataRequester {
 
         if (DBG) Log.d(TAG, "#>> POST: " + url);
 
-        InputStream inputStream = null;
+        InputStream inputStream;
         String result = "";
         try {
 
@@ -510,7 +510,7 @@ public class DataRequester {
                         if (DBG) Log.d(TAG, "@### showHead: " + key + " = value ___" + value +
                                 "___");
 
-                    } catch (JSONException e) {
+                    } catch (JSONException ignored) {
 
                     }
                 }
@@ -524,7 +524,7 @@ public class DataRequester {
             // 8. Execute POST request to the given URL
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
-            if (url == Config.URL_CREATE_SESSION) {
+            if (Objects.equals(url, Config.URL_CREATE_SESSION)) {
 
                 // Session KEY
                 Header[] headers = httpResponse.getAllHeaders();
@@ -560,14 +560,14 @@ public class DataRequester {
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
+        String line;
+        StringBuilder result = new StringBuilder();
         while ((line = bufferedReader.readLine()) != null) {
-            result += line;
+            result.append(line);
         }
 
         inputStream.close();
-        return result;
+        return result.toString();
     }
 
 

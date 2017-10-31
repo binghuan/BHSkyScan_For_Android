@@ -16,29 +16,33 @@ public class MainActivity extends AppCompatActivity
         implements FlightListFragment.OnFragmentInteractionListener {
 
     private FlightListFragment mFlightListFragment = null;
-    private FragmentManager mFragmentMgr = null;
     private FragmentTransaction mFragmentTransaction = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("EDI-sky to LOND-sky");
+
+
 
         Date nextMonday = MyUtils.getNextMonday();
         String outboundDateStr = MyUtils.getDateByFormatMMDDDayOFWeek(nextMonday);
         Date followingDay = MyUtils.getFollowingDay(nextMonday);
         String inboundDateStr = MyUtils.getDateByFormatMMDDDayOFWeek(followingDay);
-        actionBar.setSubtitle(outboundDateStr + " - " + inboundDateStr);
+        if(actionBar != null) {
+            actionBar.setTitle("EDI-sky to LOND-sky");
+            actionBar.setSubtitle(outboundDateStr + " - " + inboundDateStr);
+        }
 
-        mFragmentMgr = getSupportFragmentManager();
+
+        FragmentManager mFragmentMgr = getSupportFragmentManager();
         mFragmentTransaction = mFragmentMgr.beginTransaction();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

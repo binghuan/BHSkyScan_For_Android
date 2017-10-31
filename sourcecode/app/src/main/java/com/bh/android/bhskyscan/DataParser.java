@@ -20,22 +20,23 @@ import java.util.HashMap;
  * Created by binghuan on 30/10/2017.
  */
 
-public class DataParser {
+class DataParser {
 
-    private final String TAG = "BH_DataParser";
-    private final boolean DBG = true;
-
-    private ArrayList<Itinerary> mItineraryList = new ArrayList<Itinerary>();
-    HashMap<String, BoundLeg> mInboundLegs = new HashMap<String, BoundLeg>();
-    HashMap<String, BoundLeg> mOutboundLegs = new HashMap<String, BoundLeg>();
-    HashMap<String, Carrier> mCarriers = new HashMap<String, Carrier>();
-    HashMap<String, Place> mPlaces = new HashMap<String, Place>();
-    HashMap<String, Currency> mCurrencies = new HashMap<String, Currency>();
+    private final ArrayList<Itinerary> mItineraryList = new ArrayList<Itinerary>();
+    private final HashMap<String, BoundLeg> mInboundLegs = new HashMap<String, BoundLeg>();
+    private final HashMap<String, BoundLeg> mOutboundLegs = new HashMap<String, BoundLeg>();
+    private final HashMap<String, Carrier> mCarriers = new HashMap<String, Carrier>();
+    private final HashMap<String, Place> mPlaces = new HashMap<String, Place>();
+    private final HashMap<String, Currency> mCurrencies = new HashMap<String, Currency>();
 
     public ArrayList<Itinerary> getFlightsLivePrices(String result) {
 
+        mItineraryList.clear();
+
         String currencySymbol = "$";
 
+        boolean DBG = Config.DBG;
+        String TAG = "BH_DataParser";
         try {
             JSONObject jsonObject = new JSONObject(result);
 

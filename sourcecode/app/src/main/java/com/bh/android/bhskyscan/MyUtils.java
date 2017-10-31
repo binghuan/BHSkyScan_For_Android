@@ -46,20 +46,16 @@ import java.util.Random;
 /**
  * Created by BH_Lin on 1/13/15.
  */
-public class MyUtils {
+class MyUtils {
 
-    public final static String TAG = "BH_SR_MyUtils";
-    public static final boolean DBG = Config.DBG;
+    private final static String TAG = "BH_SR_MyUtils";
+    private static final boolean DBG = Config.DBG;
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Activity
                 .CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+        NetworkInfo networkInfo = connMgr != null ? connMgr.getActiveNetworkInfo() : null;
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     public static Date getNextMonday() {
@@ -157,7 +153,7 @@ public class MyUtils {
     }
 
 
-    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for ( int j = 0; j < bytes.length; j++ ) {
@@ -177,9 +173,9 @@ public class MyUtils {
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
             for (int i = 0; i < messageDigest.length; i++) {
-                String h = Integer.toHexString(0xFF & messageDigest[i]);
+                StringBuilder h = new StringBuilder(Integer.toHexString(0xFF & messageDigest[i]));
                 while (h.length() < 2)
-                    h = "0" + h;
+                    h.insert(0, "0");
                 hexString.append(h);
             }
             return hexString.toString();
@@ -204,7 +200,7 @@ public class MyUtils {
         try {
             String[] proj = {MediaStore.Images.Media.DATA};
             cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            int column_index = cursor != null ? cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA) : 0;
             cursor.moveToFirst();
             return cursor.getString(column_index);
         } finally {
@@ -234,12 +230,12 @@ public class MyUtils {
         return photo;
     }
 
-    public static String getRandomString(final int sizeOfRandomString) {
+    public static String getRandomString() {
         String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
 
         final Random random = new Random();
-        final StringBuilder sb = new StringBuilder(sizeOfRandomString);
-        for (int i = 0; i < sizeOfRandomString; ++i)
+        final StringBuilder sb = new StringBuilder(10);
+        for (int i = 0; i < 10; ++i)
             sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
         return sb.toString();
     }
@@ -284,8 +280,7 @@ public class MyUtils {
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            return BitmapFactory.decodeStream(input);
         } catch (IOException e) {
             // Log exception
             return null;
@@ -318,7 +313,7 @@ public class MyUtils {
         return map;
     }
 
-    public static Map<String,String> extractObjKey(JSONObject json , Map<String,
+    private static void extractObjKey(JSONObject json, Map<String,
             String> out) throws JSONException {
         Iterator<String> keys = json.keys();
         while(keys.hasNext()){
@@ -335,7 +330,6 @@ public class MyUtils {
                 out.put(key,val);
             }
         }
-        return out;
     }
 
 
@@ -369,7 +363,7 @@ public class MyUtils {
         int count = 0;
 
         for(int i=0; i< booleans.length; i++) {
-            if(booleans[i] == true) {
+            if(booleans[i]) {
                 count +=1;
             }
         }
@@ -381,15 +375,11 @@ public class MyUtils {
 
     public static boolean isValueEmptyOrZero(String value) {
 
-        boolean result = false;
+        boolean result;
 
-        if( value == null ||
-                (value.equals("") == true) ||
-                (value.equals("0") == true)) {
-            result = true;
-        } else {
-            result = false;
-        }
+        result = value == null ||
+                (value.equals("")) ||
+                (value.equals("0"));
 
         return result;
     }
@@ -414,7 +404,7 @@ public class MyUtils {
 
     public static final String DENSITY_LDPI = "LDPI";
     public static final String DENSITY_MDPI = "MDPI";
-    public static final String DENSITY_HDPI = "HDPI";
+    private static final String DENSITY_HDPI = "HDPI";
     public static final String DENSITY_XHDPI = "XHDPI";
     public static final String DENSITY_XXHDPI = "XXHDPI";
     public static float getDensity(Context context) {
@@ -462,14 +452,6 @@ public class MyUtils {
         }
     }
 
-    public static void playCashRegisterSfx(Context context) {
-        return;
-        /*
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.cash);
-        mp.start();
-        */
-    }
-
     public static String getCustomizedUserAgent(Context context) {
         String deviceSpString = "SweetRing/" + getSoftwareVersion(context) + " ";
         deviceSpString += "(Android " + Build.VERSION.RELEASE;
@@ -482,7 +464,7 @@ public class MyUtils {
         return deviceSpString;
     }
 
-    public static String getSoftwareVersion(Context context) {
+    private static String getSoftwareVersion(Context context) {
         String appVersion = "1.00";
         try {
 
@@ -491,7 +473,7 @@ public class MyUtils {
             appVersion= packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Package name not found", e);
-        };
+        }
 
 
         if(DBG) Log.i(TAG, "<< getSoftwareVersion: " + appVersion);

@@ -29,7 +29,7 @@ import java.util.Date;
  */
 public class FlightListFragment extends Fragment {
 
-    private final boolean DBG = true;
+    private final boolean DBG = Config.DBG;
     private final String LOG_TAG = "BH_FlightListFragment";
     //private ArrayList<Quote> mQuoteList = new ArrayList<>();
 
@@ -37,10 +37,6 @@ public class FlightListFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,8 +68,8 @@ public class FlightListFragment extends Fragment {
         if (DBG) Log.v(LOG_TAG, "+++ onCreate +++");
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         if (DBG) Log.v(LOG_TAG, "--- onCreate ---");
@@ -86,7 +82,7 @@ public class FlightListFragment extends Fragment {
     private TextView mResultInfoTextView = null;
 
     private void showProgressBar(boolean isShowed, String message) {
-        if (isShowed == true) {
+        if (isShowed) {
             mProgressArea.setVisibility(View.VISIBLE);
 
             if (message != null) {
@@ -172,7 +168,7 @@ public class FlightListFragment extends Fragment {
 
                 showProgressBar(true, "Step 2: Polling the results.");
                 dataRequester.httpGet(Config.getUrlForPollingSession(dataRequester.sessionKey, searchArgs.apikey),
-                        null, new DataCallback() {
+                        new DataCallback() {
                             @Override
                             public void onCallback(String result) {
                                 if (DBG)
@@ -306,8 +302,8 @@ public class FlightListFragment extends Fragment {
             public final TextView outBoundDurationText;
             public final TextView inBoundDurationText;
 
-            public ImageView outBoundCarrierIcon;
-            public ImageView inBoundCarrierIcon;
+            public final ImageView outBoundCarrierIcon;
+            public final ImageView inBoundCarrierIcon;
 
             public final TextView priceTextView;
 

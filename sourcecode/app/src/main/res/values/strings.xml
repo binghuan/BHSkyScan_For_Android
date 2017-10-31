@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">BH SkyScan</string>
     <string name="title_activity_main">BHSkyScan</string>
-    <string name="action_settings">Settings</string>
+    <string name="dotdotdot">---</string>
+    <string name="label_direct">Direct</string>
+    <string name="blank_duration">--h --m</string>
+    <string name="label_start_date">Start Date:</string>
+    <string name="label_end_date">End Date:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
