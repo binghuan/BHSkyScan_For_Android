@@ -24,4 +24,3 @@
 <img src="images/Slide12.png">
 <img src="images/Slide13.png">
 <img src="images/Slide14.png">
-<img src="images/Slide15.png">
