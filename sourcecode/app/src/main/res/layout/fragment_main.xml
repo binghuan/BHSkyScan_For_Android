@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bh.android.bhskyscan.MainActivityFragment"
+    tools:showIn="@layout/activity_main"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/label_start_date"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="Start Date:" />
+
+    <Button
+        android:id="@+id/btn_start_date"
+        style="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_weight="7"
+        android:gravity="left|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/label_start_date"
+         />
+
+    <TextView
+        android:id="@+id/label_end_date"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="End Date:"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_date"/>
+
+    <Button
+        android:id="@+id/btn_end_date"
+        style="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_weight="7"
+        android:gravity="left|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/label_end_date"
+        />
+
+</android.support.constraint.ConstraintLayout>
