@@ -6,6 +6,9 @@
     <string name="blank_duration">--h --m</string>
     <string name="label_start_date">Start Date:</string>
     <string name="label_end_date">End Date:</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="carrier">Carrier</string>
+    <string name="from_to">%1$s - %2$s</string>
+    <string name="price_holder">%1$s%2$s</string>
+    <string name="result_shown">%1$d results shown</string>
+    <string name="journey_info_placeholder">%1$s-%2$s, %3$s</string>
 </resources>

@@ -21,7 +21,7 @@ class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
     private final ImageView imageview;
 
-    public ImageDownloader(Context context, ImageView view) {
+    public ImageDownloader(ImageView view) {
         this.imageview = view;
     }
 
@@ -39,21 +39,11 @@ class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
         return mIcon11;
     }
 
-    public int mImgSizeW = 32;
-    public int mImgSizeH = 32;
-
     protected void onPostExecute(Bitmap bitmap) {
 
         if (bitmap == null) {
             return;
         }
-//        if (DBG) Log.v(TAG, ">>> getOriginal Bitmap Size: W -> " +
-//                bitmap.getWidth() + ", H -> " + bitmap.getHeight());
-//        if (DBG) Log.v(TAG, ">>> Convert Bitmap Size to : W -> " +
-//                mImgSizeW + ", H -> " + mImgSizeH);
-//
-//        Drawable d = new BitmapDrawable(mContext.getResources(),
-//                Bitmap.createScaledBitmap(bitmap, mImgSizeW, mImgSizeH, false));
         imageview.setImageBitmap(bitmap);
     }
 

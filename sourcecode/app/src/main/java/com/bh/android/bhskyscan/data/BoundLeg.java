@@ -19,7 +19,13 @@ public class BoundLeg {
     public String carrierId;
 
     private String arrival;
+    public String getArrival() {
+        return this.arrival;
+    }
     private String arrivalDate;
+    public String getArrivalDate() {
+        return this.arrivalDate;
+    }
     public String arrivalTime;
     public void setArrivalDateTime(String dateTime) {
         this.arrival = dateTime;
@@ -32,6 +38,9 @@ public class BoundLeg {
     }
 
     private String departure;
+    public String getDeparture() {
+        return this.departure;
+    }
     public void setDepartureDateTime(String dateTime) {
         this.departure = dateTime;
         if(this.departure != null) {
@@ -43,6 +52,9 @@ public class BoundLeg {
     }
     public String departureTime;
     private String departureDate;
+    public String getDepartureDate() {
+        return this.departureDate;
+    }
     public String destinationStation;
     public Place destinationPlace;
 

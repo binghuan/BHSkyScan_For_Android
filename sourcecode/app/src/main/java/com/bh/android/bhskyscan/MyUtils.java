@@ -195,6 +195,22 @@ class MyUtils {
         return dateFormat.format(cal.getTime());
     }
 
+    public static String getCalculatedDuration(int minutes) {
+        int hours = minutes/60;
+        if(hours > 0 ) {
+            minutes = minutes - hours*60;
+        }
+
+        String result;
+        if(hours > 0 ) {
+            result = hours + " h " + minutes + "m";
+        } else {
+            result = minutes + "m";
+        }
+
+        return result;
+    }
+
     public static String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {

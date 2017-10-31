@@ -1,6 +1,7 @@
 package com.bh.android.bhskyscan;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class FlightListFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private Resources mResources;
+
     public FlightListFragment() {
         // Required empty public constructor
     }
@@ -66,6 +69,10 @@ public class FlightListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (DBG) Log.v(LOG_TAG, "+++ onCreate +++");
+
+        if (mResources == null) {
+            mResources = this.getResources();
+        }
 
         if (getArguments() != null) {
             String mParam1 = getArguments().getString(ARG_PARAM1);
@@ -188,7 +195,8 @@ public class FlightListFragment extends Fragment {
 
     private void showResult() {
         mResultInfoTextView.setText(
-                mItineraryList.size() + " results showen"
+                String.format(mResources.getString(R.string.result_shown),
+                        mItineraryList.size())
         );
     }
 
@@ -247,36 +255,45 @@ public class FlightListFragment extends Fragment {
             Itinerary itinerary = mItineraryList.get(position);
 
             if (itinerary != null) {
-
-
                 holder.outBoundDateTimeText.setText(
-                        itinerary.outboundLeg.departureTime + " - " + itinerary.outboundLeg.arrivalTime
+                        String.format(mResources.getString(R.string.from_to),
+                                itinerary.outboundLeg.departureTime,
+                                itinerary.outboundLeg.arrivalTime
+                        )
                 );
                 holder.outBoundDateTimeDescription.setText(
-                        itinerary.outboundLeg.originPlace.code + "-" +
-                                itinerary.outboundLeg.destinationPlace.code +
-                                ", " + itinerary.outboundLeg.carrier.name
+                        String.format(mResources.getString(R.string.journey_info_placeholder),
+                                itinerary.outboundLeg.originPlace.code,
+                                itinerary.outboundLeg.destinationPlace.code,
+                                itinerary.outboundLeg.carrier.name
+                        )
                 );
 
                 holder.inBoundDateTimeText.setText(
-                        itinerary.inboundLeg.departureTime + " - " + itinerary.inboundLeg.arrivalTime
+                        String.format(mResources.getString(R.string.from_to),
+                                itinerary.inboundLeg.departureTime,
+                                itinerary.inboundLeg.arrivalTime)
                 );
                 holder.inBoundDateTimeDescription.setText(
-                        itinerary.inboundLeg.originPlace.code + "-" +
-                                itinerary.inboundLeg.destinationPlace.code +
-                                ", " + itinerary.inboundLeg.carrier.name
+                        String.format(mResources.getString(R.string.journey_info_placeholder),
+                                itinerary.inboundLeg.originPlace.code,
+                                itinerary.inboundLeg.destinationPlace.code,
+                                itinerary.inboundLeg.carrier.name
+                        )
                 );
 
-                holder.outBoundDurationText.setText(itinerary.outboundLeg.duration + "m");
-                holder.inBoundDurationText.setText(itinerary.inboundLeg.duration + "m");
+                holder.outBoundDurationText.setText(MyUtils.getCalculatedDuration(itinerary.outboundLeg.duration));
+                holder.inBoundDurationText.setText(MyUtils.getCalculatedDuration(itinerary.inboundLeg.duration));
                 holder.priceTextView.setText(
-                        itinerary.pricingOptions.get(0).currencySymbol +
+                        String.format(mResources.getString(R.string.price_holder),
+                                itinerary.pricingOptions.get(0).currencySymbol,
                                 String.valueOf(itinerary.pricingOptions.get(0).price)
+                        )
                 );
 
-                new ImageDownloader(mContext, holder.outBoundCarrierIcon)
+                new ImageDownloader(holder.outBoundCarrierIcon)
                         .execute(itinerary.outboundLeg.carrier.imageUrl);
-                new ImageDownloader(mContext, holder.inBoundCarrierIcon)
+                new ImageDownloader(holder.inBoundCarrierIcon)
                         .execute(itinerary.inboundLeg.carrier.imageUrl);
 
             }
@@ -291,8 +308,7 @@ public class FlightListFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            //public final ImageView iconForOutbound;
-            //public final ImageView iconForInbound;
+
             public final TextView outBoundDateTimeText;
             public final TextView outBoundDateTimeDescription;
 
