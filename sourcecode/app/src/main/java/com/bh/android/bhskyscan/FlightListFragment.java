@@ -87,8 +87,12 @@ public class FlightListFragment extends Fragment {
     private TextView mProgressMsg = null;
     private View mProgressArea = null;
     private TextView mResultInfoTextView = null;
+    private boolean isReady = true;
 
     private void showProgressBar(boolean isShowed, String message) {
+
+        isReady = !isShowed;
+
         if (isShowed) {
             mProgressArea.setVisibility(View.VISIBLE);
 
@@ -136,6 +140,7 @@ public class FlightListFragment extends Fragment {
 
     private ArrayList<Itinerary> mItineraryList = new ArrayList<Itinerary>();
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -148,7 +153,16 @@ public class FlightListFragment extends Fragment {
             mDataParser = new DataParser();
         }
 
-        final DataRequester dataRequester = new DataRequester(mContext);
+
+        if (isReady) {
+            searchFlights();
+        }
+    }
+
+    private void searchFlights() {
+        if (mDataRequester == null) {
+            mDataRequester = new DataRequester(mContext);
+        }
         if (DBG) Log.d(LOG_TAG, ">>@Server+ReportAppInstalledForMapping");
 
         final SearchArgs searchArgs = new SearchArgs();
@@ -167,14 +181,14 @@ public class FlightListFragment extends Fragment {
         //20171031@BH_Lin: ----------------------------------------------------<
 
         showProgressBar(true, "Step 1: Creating the session");
-        dataRequester.httpPost(Config.URL_CREATE_SESSION, searchArgs.getParametersJSONObj(), new DataCallback() {
+        mDataRequester.httpPost(Config.URL_CREATE_SESSION, searchArgs.getParametersJSONObj(), new DataCallback() {
             @Override
             public void onCallback(String result) {
                 if (DBG)
                     Log.d(LOG_TAG, ">>@Server+ReportAppInstalledForMapping: " + result);
 
                 showProgressBar(true, "Step 2: Polling the results.");
-                dataRequester.httpGet(Config.getUrlForPollingSession(dataRequester.sessionKey, searchArgs.apikey),
+                mDataRequester.httpGet(Config.getUrlForPollingSession(mDataRequester.sessionKey, searchArgs.apikey),
                         new DataCallback() {
                             @Override
                             public void onCallback(String result) {
@@ -190,7 +204,6 @@ public class FlightListFragment extends Fragment {
                         });
             }
         });
-
     }
 
     private void showResult() {

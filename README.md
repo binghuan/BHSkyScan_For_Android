@@ -4,7 +4,7 @@
 <img src="images/illustration_1.png" height=400px;>
 <img src="images/illustration_2.jpg" height=400px;>
 <p>You can download the apk from here. </p>
-<a href="release/app-release_V0.1.1.apk">
+<a href="release/app-release_V0.1.02.apk">
 	<img src="images/apk-file-format.png">
 </a>
 <a href="https://youtu.be/MkpJGjgM794" target="_blank">
