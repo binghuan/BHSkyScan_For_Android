@@ -48,13 +48,13 @@ class SearchArgs {
 
         requestBody = COUNTRY + "=" + this.country +
                 "&" + CURRENCY + "=" + this.currency +
-                "&" + LOCALE + "="+ this.locale +
-                "&" + ORIGIN_PLACE + "="+ this.originPlace +
-                "&" + destinationPlace + "="+ this.destinationPlace +
-                "&" + outboundDate + "="+ this.outboundDate +
-                "&" + inboundDate + "="+ this.inboundDate +
-                "&" + adults + "="+ this.adults +
-                "&" + apikey + "="+ this.apikey ;
+                "&" + LOCALE + "=" + this.locale +
+                "&" + ORIGIN_PLACE + "=" + this.originPlace +
+                "&" + destinationPlace + "=" + this.destinationPlace +
+                "&" + outboundDate + "=" + this.outboundDate +
+                "&" + inboundDate + "=" + this.inboundDate +
+                "&" + adults + "=" + this.adults +
+                "&" + apikey + "=" + this.apikey;
 
 
         return requestBody;
@@ -64,17 +64,17 @@ class SearchArgs {
         return new JSONObject(this.getParametersMap());
     }
 
-    private Map<String,String> getParametersMap() {
-        Map<String,String> params = new HashMap<String, String>();
-        params.put(SearchArgs.COUNTRY,this.country);
-        params.put(SearchArgs.CURRENCY,this.currency);
-        params.put(SearchArgs.LOCALE,this.locale);
-        params.put(SearchArgs.ORIGIN_PLACE,this.originPlace);
-        params.put(SearchArgs.DESTINATION_PLACE,this.destinationPlace);
-        params.put(SearchArgs.OUTBOUND_DATE,this.outboundDate);
-        params.put(SearchArgs.INBOUND_DATE,this.inboundDate);
+    private Map<String, String> getParametersMap() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put(SearchArgs.COUNTRY, this.country);
+        params.put(SearchArgs.CURRENCY, this.currency);
+        params.put(SearchArgs.LOCALE, this.locale);
+        params.put(SearchArgs.ORIGIN_PLACE, this.originPlace);
+        params.put(SearchArgs.DESTINATION_PLACE, this.destinationPlace);
+        params.put(SearchArgs.OUTBOUND_DATE, this.outboundDate);
+        params.put(SearchArgs.INBOUND_DATE, this.inboundDate);
         params.put(SearchArgs.ADULTS, String.valueOf(this.adults));
-        params.put(SearchArgs.APIKEY,this.apikey);
+        params.put(SearchArgs.APIKEY, this.apikey);
 
         return params;
     }

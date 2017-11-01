@@ -28,12 +28,11 @@ public class MainActivity extends AppCompatActivity
         ActionBar actionBar = getSupportActionBar();
 
 
-
         Date nextMonday = MyUtils.getNextMonday();
         String outboundDateStr = MyUtils.getDateByFormatMMDDDayOFWeek(nextMonday);
         Date followingDay = MyUtils.getFollowingDay(nextMonday);
         String inboundDateStr = MyUtils.getDateByFormatMMDDDayOFWeek(followingDay);
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setTitle("EDI-sky to LOND-sky");
             actionBar.setSubtitle(outboundDateStr + " - " + inboundDateStr);
         }

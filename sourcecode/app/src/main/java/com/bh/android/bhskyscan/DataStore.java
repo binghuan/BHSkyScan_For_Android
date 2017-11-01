@@ -56,7 +56,7 @@ public class DataStore {
     public void setReferrer(String value) {
         mPrefEditor.putString(KEY_INSTALL_REFERRER, value).apply();
 
-        if(DBG) Log.d(TAG, ">> setReferrer: " + value);
+        if (DBG) Log.d(TAG, ">> setReferrer: " + value);
 
     }
 
@@ -82,7 +82,7 @@ public class DataStore {
 
     public void setFBEmail(String value) {
         mPrefEditor.putString(KEY_FB_EMAIL, value).apply();
-        if(DBG) Log.d(TAG, "@@@@@@@>> setFBEmail: " + value);
+        if (DBG) Log.d(TAG, "@@@@@@@>> setFBEmail: " + value);
     }
 
     public String getFBEmail() {
@@ -93,7 +93,7 @@ public class DataStore {
 
     public void setLastLikeServerDefault(JSONObject value) {
         mPrefEditor.putString(KEY_LIKE_SERVER_DEFAULT, value.toString()).apply();
-        if(DBG) Log.d(TAG, "@@@@@@@>> setLastLikeServerDefault: " + value.toString());
+        if (DBG) Log.d(TAG, "@@@@@@@>> setLastLikeServerDefault: " + value.toString());
     }
 
     public JSONObject getLastLikeServerDefault() {
@@ -106,13 +106,13 @@ public class DataStore {
             e.printStackTrace();
         }
 
-        if(DBG) Log.d(TAG, ">> getLastLikeServerDefault: " + value);
+        if (DBG) Log.d(TAG, ">> getLastLikeServerDefault: " + value);
         return value;
     }
 
     public void setLastSearchServerDefault(JSONObject value) {
         mPrefEditor.putString(KEY_SEARCH_SERVER_DEFAULT, value.toString()).apply();
-        if(DBG) Log.d(TAG, "@@@@@@@>> setLastSearchServerDefault: " + value.toString());
+        if (DBG) Log.d(TAG, "@@@@@@@>> setLastSearchServerDefault: " + value.toString());
     }
 
     public JSONObject getLastSearchServerDefault() {
@@ -125,20 +125,20 @@ public class DataStore {
             e.printStackTrace();
         }
 
-        if(DBG) Log.d(TAG, ">> getLastSearchServerDefault: " + value);
+        if (DBG) Log.d(TAG, ">> getLastSearchServerDefault: " + value);
         return value;
     }
 
     public void setLastLikeSetting(JSONObject value) {
         mPrefEditor.putString(KEY_LIKE_SETTINGS, value.toString()).apply();
-        if(DBG) Log.d(TAG, "@@@@@@@>> setLastLikeSetting: " + value.toString());
+        if (DBG) Log.d(TAG, "@@@@@@@>> setLastLikeSetting: " + value.toString());
     }
 
     public JSONObject getLastLikeSetting() {
         JSONObject value = null;
         String jsonString = mSharedPreferences.getString(KEY_LIKE_SETTINGS, null);
 
-        if(jsonString != null && !jsonString.equals("")) {
+        if (jsonString != null && !jsonString.equals("")) {
             try {
                 value = new JSONObject(jsonString);
             } catch (JSONException e) {
@@ -147,13 +147,13 @@ public class DataStore {
         }
 
 
-        if(DBG) Log.d(TAG, ">> getLastLikeSetting: " + value);
+        if (DBG) Log.d(TAG, ">> getLastLikeSetting: " + value);
         return value;
     }
 
     public void setLastSearchRecord(JSONArray value) {
         mPrefEditor.putString(KEY_SEARCH_RECORD, value.toString()).apply();
-        if(DBG) Log.d(TAG, "@@@@@@@>> setLastSearchRecord: " + value.toString());
+        if (DBG) Log.d(TAG, "@@@@@@@>> setLastSearchRecord: " + value.toString());
     }
 
     public JSONArray getLastSearchRecord() {
@@ -166,52 +166,52 @@ public class DataStore {
             e.printStackTrace();
         }
 
-        if(DBG) Log.d(TAG, ">> getLastSearchRecord: " + value);
+        if (DBG) Log.d(TAG, ">> getLastSearchRecord: " + value);
         return value;
     }
 
     public DataStore(Context context) {
 
-        if(mSharedPreferences == null) {
+        if (mSharedPreferences == null) {
             mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         }
 
-        if(mPrefEditor == null) {
+        if (mPrefEditor == null) {
             mPrefEditor = mSharedPreferences.edit();
         }
     }
 
     public void setRawMemberId(String value) {
-        if(DBG) Log.d(TAG, ">> setRawMemberId");
+        if (DBG) Log.d(TAG, ">> setRawMemberId");
         mPrefEditor.putString(KEY_RAW_MEMBER_ID, value).apply();
     }
 
     public String getRawMemberId() {
         String value;
         value = mSharedPreferences.getString(KEY_RAW_MEMBER_ID, null);
-        if(DBG) Log.d(TAG, ">> getRawMemberId: " + value);
+        if (DBG) Log.d(TAG, ">> getRawMemberId: " + value);
         return value;
     }
 
     public void setEncryptedMemberId(String value) {
-        if(DBG) Log.d(TAG, ">> setEncryptedMemberId");
+        if (DBG) Log.d(TAG, ">> setEncryptedMemberId");
         mPrefEditor.putString(KEY_ENCRYPTED_MEMBER_ID, value).apply();
     }
 
     public String getKeyEncryptedMemberId() {
         String value;
         value = mSharedPreferences.getString(KEY_ENCRYPTED_MEMBER_ID, null);
-        if(DBG) Log.d(TAG, ">> getKeyEncryptedMemberId: " + value);
+        if (DBG) Log.d(TAG, ">> getKeyEncryptedMemberId: " + value);
         return value;
     }
 
     public void setUserProfile(String value) {
-        if(DBG) Log.d(TAG, ">> setUserProfile");
+        if (DBG) Log.d(TAG, ">> setUserProfile");
         mPrefEditor.putString(KEY_USER_PROFILE, value).apply();
     }
 
     public void setUserProfile(JSONObject jsonObject) {
-        if(DBG) Log.d(TAG, ">> setUserProfile");
+        if (DBG) Log.d(TAG, ">> setUserProfile");
         String value = jsonObject.toString();
         mPrefEditor.putString(KEY_USER_PROFILE, value).apply();
     }
@@ -219,7 +219,7 @@ public class DataStore {
     private String getUserProfile() {
         String value;
         value = mSharedPreferences.getString(KEY_USER_PROFILE, null);
-        if(DBG) Log.d(TAG, ">> getUserProfile: " + value);
+        if (DBG) Log.d(TAG, ">> getUserProfile: " + value);
         return value;
     }
 
@@ -243,24 +243,24 @@ public class DataStore {
     public String getUserBirthday() {
         String value;
         value = mSharedPreferences.getString(KEY_FB_BIRTHDAY, null);
-        if(DBG) Log.d(TAG, ">> getUserBirthday: " + value);
+        if (DBG) Log.d(TAG, ">> getUserBirthday: " + value);
         return value;
     }
 
     public void saveUserBirthday(String value) {
-        if(DBG) Log.d(TAG, ">> saveUserBirthday");
+        if (DBG) Log.d(TAG, ">> saveUserBirthday");
         mPrefEditor.putString(KEY_FB_BIRTHDAY, value).apply();
     }
 
     public String getUserFirstName() {
         String value;
         value = mSharedPreferences.getString(KEY_FB_FIRST_NAME, null);
-        if(DBG) Log.d(TAG, ">> getUserFirstName: " + value);
+        if (DBG) Log.d(TAG, ">> getUserFirstName: " + value);
         return value;
     }
 
     public void saveUserFirstName(String value) {
-        if(DBG) Log.d(TAG, ">> saveUserFirstName");
+        if (DBG) Log.d(TAG, ">> saveUserFirstName");
         mPrefEditor.putString(KEY_FB_FIRST_NAME, value).apply();
     }
 
@@ -269,20 +269,20 @@ public class DataStore {
         String value;
 
         value = mSharedPreferences.getString(KEY_FB_GENDER, null);
-        if(DBG) Log.d(TAG, ">> getUserGender: " + value);
+        if (DBG) Log.d(TAG, ">> getUserGender: " + value);
 
         return value;
     }
 
     public void saveUserGender(String gender) {
-        if(DBG) Log.d(TAG, ">> getUserGender");
+        if (DBG) Log.d(TAG, ">> getUserGender");
         mPrefEditor.putString(KEY_FB_GENDER, gender).apply();
     }
 
     // save last Facebook ID and TOKEN
     public void saveFacebookInfo(String fbId, String fbToken) {
 
-        if(DBG) Log.d(TAG, ">> saveFacebookInfo: " + fbId + ", " + fbToken);
+        if (DBG) Log.d(TAG, ">> saveFacebookInfo: " + fbId + ", " + fbToken);
         mPrefEditor.putString(KEY_FB_ID, fbId).putString(KEY_FB_TOKEN, fbToken).apply();
     }
 
@@ -292,17 +292,17 @@ public class DataStore {
         public String token;
     }
 
-    public FacebookInfo getFacebookInfo(){
+    public FacebookInfo getFacebookInfo() {
         FacebookInfo fbInfo = new FacebookInfo();
         fbInfo.id = mSharedPreferences.getString(KEY_FB_ID, null);
         fbInfo.token = mSharedPreferences.getString(KEY_FB_TOKEN, null);
 
-        if(DBG) Log.d(TAG, ">> getFacebookInfo: " + fbInfo.id + ", " + fbInfo.token);
+        if (DBG) Log.d(TAG, ">> getFacebookInfo: " + fbInfo.id + ", " + fbInfo.token);
         return fbInfo;
     }
 
     public void saveLastPictureDataUri(Uri uri) {
-        if(DBG) Log.d(TAG, ">> saveLastPictureDataUri: " + uri.toString());
+        if (DBG) Log.d(TAG, ">> saveLastPictureDataUri: " + uri.toString());
         mPrefEditor.putString(KEY_PICTURE_URI, uri.toString()).apply();
     }
 
@@ -310,12 +310,12 @@ public class DataStore {
 
         String uriString = mSharedPreferences.getString(KEY_PICTURE_URI, null);
         Uri uri = null;
-        if(uriString != null) {
+        if (uriString != null) {
             uri = Uri.parse(uriString);
 
         }
 
-        if(DBG) Log.d(TAG, ">> getLastPictureDataUri: " + uriString);
+        if (DBG) Log.d(TAG, ">> getLastPictureDataUri: " + uriString);
 
         return uri;
     }

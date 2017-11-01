@@ -111,7 +111,7 @@ class DataRequester {
     private static final int METHOD_DELETE = 4;
 
 
-    private class  HttpAsyncTask extends AsyncTask<String, Void, String> {
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
 
         private String url = null;
         private int method = -1;
@@ -353,7 +353,6 @@ class DataRequester {
             String contentUriString;
 
             if (jsonObject != null) {
-                json = jsonObject.toString();
 
                 Uri contentUri;
                 Bitmap photo = null;

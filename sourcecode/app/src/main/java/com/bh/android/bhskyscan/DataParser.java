@@ -41,14 +41,14 @@ class DataParser {
             JSONObject jsonObject = new JSONObject(result);
 
             JSONArray currencyObjArray = jsonObject.getJSONArray("Currencies");
-            for(int i =0; i< currencyObjArray.length(); i++) {
-                JSONObject currencyObj = (JSONObject)currencyObjArray.get(i);
+            for (int i = 0; i < currencyObjArray.length(); i++) {
+                JSONObject currencyObj = (JSONObject) currencyObjArray.get(i);
 
                 Currency currency = new Currency();
                 currency.code = currencyObj.getString(Currency.CODE);
                 currency.symbol = currencyObj.getString(Currency.SYMBOL);
 
-                if(i == 0) {
+                if (i == 0) {
                     currencySymbol = currency.symbol;
                 }
 
@@ -56,12 +56,11 @@ class DataParser {
             }
 
 
-
             JSONArray placeObjArray = jsonObject.getJSONArray("Places");
-            for(int i=0; i< placeObjArray.length(); i++) {
+            for (int i = 0; i < placeObjArray.length(); i++) {
                 Place place = new Place();
 
-                JSONObject placeObj = (JSONObject)placeObjArray.get(i);
+                JSONObject placeObj = (JSONObject) placeObjArray.get(i);
                 place.code = placeObj.getString(Place.CODE);
                 place.id = placeObj.getString(Place.ID);
                 place.name = placeObj.getString(Place.NAME);
@@ -71,10 +70,10 @@ class DataParser {
             }
 
             JSONArray carrierObjArray = jsonObject.getJSONArray("Carriers");
-            for(int i =0; i< carrierObjArray.length(); i++) {
+            for (int i = 0; i < carrierObjArray.length(); i++) {
                 Carrier carrier = new Carrier();
 
-                JSONObject carrierObj = (JSONObject)carrierObjArray.get(i);
+                JSONObject carrierObj = (JSONObject) carrierObjArray.get(i);
                 carrier.code = carrierObj.getString(Carrier.CODE);
                 carrier.displayCode = carrierObj.getString(Carrier.DISPLAY_CODE);
                 carrier.id = carrierObj.getString(Carrier.ID);
@@ -85,16 +84,16 @@ class DataParser {
             }
 
             JSONArray boundLegObjArray = jsonObject.getJSONArray("Legs");
-            for(int i = 0; i< boundLegObjArray.length(); i++) {
+            for (int i = 0; i < boundLegObjArray.length(); i++) {
                 BoundLeg boundLeg = new BoundLeg();
 
-                JSONObject boundLegObj = (JSONObject)boundLegObjArray.get(i);
+                JSONObject boundLegObj = (JSONObject) boundLegObjArray.get(i);
                 //boundLeg.arrival = boundLegObj.getString(BoundLeg.ARRIVAL);
                 boundLeg.setArrivalDateTime(boundLegObj.getString(BoundLeg.ARRIVAL));
                 //boundLeg.departure = boundLegObj.getString(BoundLeg.DEPARTURE);
                 boundLeg.setDepartureDateTime(boundLegObj.getString(BoundLeg.DEPARTURE));
-                if(boundLeg.departureTime == null) {
-                    if(DBG)Log.w(TAG, "boundLeg.departureTime == null");
+                if (boundLeg.departureTime == null) {
+                    if (DBG) Log.w(TAG, "boundLeg.departureTime == null");
                 }
 
                 boundLeg.directionality = boundLegObj.getString(BoundLeg.DIRECTIONALITY);
@@ -111,7 +110,7 @@ class DataParser {
                 boundLeg.carrierId = String.valueOf(carriersObjArray.get(0));
                 boundLeg.carrier = mCarriers.get(boundLeg.carrierId);
 
-                if(boundLeg.directionality.equalsIgnoreCase("outbound")) {
+                if (boundLeg.directionality.equalsIgnoreCase("outbound")) {
                     mOutboundLegs.put(boundLeg.id, boundLeg);
                 } else {
                     mInboundLegs.put(boundLeg.id, boundLeg);
@@ -119,22 +118,22 @@ class DataParser {
             }
 
             JSONArray itineraryObjArray = jsonObject.getJSONArray("Itineraries");
-            for(int i=0; i< itineraryObjArray.length(); i++) {
+            for (int i = 0; i < itineraryObjArray.length(); i++) {
 
                 Itinerary itinerary = new Itinerary();
 
-                JSONObject itinerayObj = (JSONObject)itineraryObjArray.get(i);
+                JSONObject itinerayObj = (JSONObject) itineraryObjArray.get(i);
                 itinerary.inboundLegId = itinerayObj.getString(Itinerary.INBOUDLEG_ID);
                 itinerary.inboundLeg = mInboundLegs.get(itinerary.inboundLegId);
 
-                itinerary.outboundLegId= itinerayObj.getString(Itinerary.OUTBOUDLEG_ID);
+                itinerary.outboundLegId = itinerayObj.getString(Itinerary.OUTBOUDLEG_ID);
                 itinerary.outboundLeg = mOutboundLegs.get(itinerary.outboundLegId);
 
                 JSONArray pricingObjArray = itinerayObj.getJSONArray("PricingOptions");
-                for(int j =0; j< pricingObjArray.length(); j++) {
+                for (int j = 0; j < pricingObjArray.length(); j++) {
                     PricingOption pricingOption = new PricingOption();
 
-                    JSONObject pricingOptionObj = (JSONObject)pricingObjArray.get(j);
+                    JSONObject pricingOptionObj = (JSONObject) pricingObjArray.get(j);
                     pricingOption.price = pricingOptionObj.getDouble(PricingOption.PRICE);
                     pricingOption.quoteAgeInMinutes = pricingOptionObj.getInt(PricingOption.QUOTE_AGE_IN_MINUTES);
                     pricingOption.currencySymbol = currencySymbol;
@@ -150,7 +149,7 @@ class DataParser {
             e.printStackTrace();
         }
 
-        if(DBG) Log.v(TAG, "Get mItineraryList: " +  mItineraryList.size());
+        if (DBG) Log.v(TAG, "Get mItineraryList: " + mItineraryList.size());
         return mItineraryList;
 
     }

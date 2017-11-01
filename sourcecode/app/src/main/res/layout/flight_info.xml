@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -19,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,9 +28,9 @@
                     android:id="@+id/in_carrier_icon"
                     android:layout_width="31dp"
                     android:layout_height="31dp"
+                    android:contentDescription="@string/carrier"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_airliner"
-                    android:contentDescription="@string/carrier" />
+                    android:src="@drawable/ic_airliner" />
 
                 <LinearLayout
 
@@ -49,7 +46,7 @@
                         android:gravity="center"
                         android:text="@string/dotdotdot"
                         android:textColor="@android:color/black"
-                        android:textSize="13pt"/>
+                        android:textSize="13pt" />
 
 
                     <TextView
@@ -58,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/dotdotdot"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
 
@@ -73,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/label_direct"
                         android:textColor="@android:color/black"
-                        android:textSize="13pt"/>
+                        android:textSize="13pt" />
 
                     <TextView
                         android:id="@+id/outbound_duration"
@@ -81,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:text="@string/blank_duration"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
 
@@ -96,9 +93,9 @@
                     android:id="@+id/out_carrier_icon"
                     android:layout_width="31dp"
                     android:layout_height="31dp"
+                    android:contentDescription="@string/carrier"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_airliner"
-                    android:contentDescription="@string/carrier" />
+                    android:src="@drawable/ic_airliner" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -113,14 +110,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dotdotdot"
                         android:textColor="@android:color/black"
-                        android:textSize="13pt"/>
+                        android:textSize="13pt" />
 
                     <TextView
                         android:id="@+id/inbound_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dotdotdot"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
 
@@ -135,14 +132,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/label_direct"
                         android:textColor="@android:color/black"
-                        android:textSize="13pt"/>
+                        android:textSize="13pt" />
 
                     <TextView
                         android:id="@+id/inbound_duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/blank_duration"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -163,7 +160,7 @@
                         android:layout_alignParentEnd="true"
                         android:text="@string/dotdotdot"
                         android:textColor="@android:color/black"
-                        android:textSize="13pt"/>
+                        android:textSize="13pt" />
 
                 </RelativeLayout>
 

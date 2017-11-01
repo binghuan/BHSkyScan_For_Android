@@ -64,12 +64,12 @@ class MyUtils {
         Date currentTime = Calendar.getInstance().getTime();
         calendar.setTime(currentTime);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        if(DBG)Log.v(TAG, "dayOfWeek: " + dayOfWeek);
+        if (DBG) Log.v(TAG, "dayOfWeek: " + dayOfWeek);
 
         int diffDays = (7 - dayOfWeek + 2);
         calendar.add(Calendar.DATE, diffDays);
         Date dt = calendar.getTime();
-        if(DBG)Log.v(TAG, ">> getNextMonday: " + dt.toString());
+        if (DBG) Log.v(TAG, ">> getNextMonday: " + dt.toString());
         return dt;
     }
 
@@ -78,11 +78,12 @@ class MyUtils {
         calendar.setTime(date);
         calendar.add(Calendar.DATE, 1);
         Date dt = calendar.getTime();
-        if(DBG)Log.v(TAG, ">> getFollowingDay: " + dt.toString());
+        if (DBG) Log.v(TAG, ">> getFollowingDay: " + dt.toString());
         return dt;
     }
+
     public static String getDateByFormatMMDDDayOFWeek(Date date) {
-        if(DBG)Log.v(TAG, ">> getDateByFormatMMDDDayOFWeek: " + date);
+        if (DBG) Log.v(TAG, ">> getDateByFormatMMDDDayOFWeek: " + date);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(date);
@@ -114,7 +115,7 @@ class MyUtils {
         };
 
         int monthOfYear = Integer.parseInt(dates[1]) - 1;
-        if(DBG)Log.v(TAG, "- monthOfYear: " + monthOfYear + " from " + dates[1]);
+        if (DBG) Log.v(TAG, "- monthOfYear: " + monthOfYear + " from " + dates[1]);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -122,17 +123,17 @@ class MyUtils {
         String result =
                 monthNames[monthOfYear] + " " + dates[2] + "., " + daysOfWeek[dayOfWeek - 1];
 
-        if(DBG)Log.v(TAG, "<< getDateByFormatMMDDDayOFWeek: " + result);
+        if (DBG) Log.v(TAG, "<< getDateByFormatMMDDDayOFWeek: " + result);
         return result;
     }
 
     public static String getDateByFormatYYYYMMDD(Date date) {
-        if(DBG)Log.v(TAG, ">> getDateByFormatYYYYMMD: " + date);
+        if (DBG) Log.v(TAG, ">> getDateByFormatYYYYMMD: " + date);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(date);
 
-        if(DBG)Log.v(TAG, "<< getDateByFormatYYYYMMD: " + dateString);
+        if (DBG) Log.v(TAG, "<< getDateByFormatYYYYMMD: " + dateString);
         return dateString;
     }
 
@@ -154,9 +155,10 @@ class MyUtils {
 
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
+        for (int j = 0; j < bytes.length; j++) {
             int v = bytes[j] & 0xFF;
             hexChars[j * 2] = hexArray[v >>> 4];
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];
@@ -167,8 +169,10 @@ class MyUtils {
     public static String getMd5String(String s) {
 
         try {
-        // Create MD5 Hash
-        MessageDigest digest = java.security.MessageDigest .getInstance("MD5"); digest.update(s.getBytes()); byte messageDigest[] = digest.digest();
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
 
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
@@ -196,13 +200,13 @@ class MyUtils {
     }
 
     public static String getCalculatedDuration(int minutes) {
-        int hours = minutes/60;
-        if(hours > 0 ) {
-            minutes = minutes - hours*60;
+        int hours = minutes / 60;
+        if (hours > 0) {
+            minutes = minutes - hours * 60;
         }
 
         String result;
-        if(hours > 0 ) {
+        if (hours > 0) {
             result = hours + " h " + minutes + "m";
         } else {
             result = minutes + "m";
@@ -272,15 +276,15 @@ class MyUtils {
                 })
                 .create();
 
-        if(title != null) {
+        if (title != null) {
             dialog.setTitle(title);
         }
 
-        if(message != null) {
+        if (message != null) {
             dialog.setMessage(message);
         }
 
-        if(iconResId != -1) {
+        if (iconResId != -1) {
             dialog.setIcon(iconResId);
         }
 
@@ -332,23 +336,21 @@ class MyUtils {
     private static void extractObjKey(JSONObject json, Map<String,
             String> out) throws JSONException {
         Iterator<String> keys = json.keys();
-        while(keys.hasNext()){
+        while (keys.hasNext()) {
             String key = keys.next();
             String val = null;
-            try{
+            try {
                 JSONObject value = json.getJSONObject(key);
-                extractObjKey(value,out);
-            }catch(Exception e){
+                extractObjKey(value, out);
+            } catch (Exception e) {
                 val = json.getString(key);
             }
 
-            if(val != null){
-                out.put(key,val);
+            if (val != null) {
+                out.put(key, val);
             }
         }
     }
-
-
 
 
     public static Bitmap getCircleBitmap(Bitmap bitmap) {
@@ -378,13 +380,13 @@ class MyUtils {
 
         int count = 0;
 
-        for(int i=0; i< booleans.length; i++) {
-            if(booleans[i]) {
-                count +=1;
+        for (int i = 0; i < booleans.length; i++) {
+            if (booleans[i]) {
+                count += 1;
             }
         }
 
-        if(DBG) Log.d(TAG,">> countTrueInBooleanArray: " + count);
+        if (DBG) Log.d(TAG, ">> countTrueInBooleanArray: " + count);
 
         return count;
     }
@@ -413,7 +415,7 @@ class MyUtils {
             }
         }
 
-        if(DBG) Log.d(TAG, "pushKeys : " + obj1.toString());
+        if (DBG) Log.d(TAG, "pushKeys : " + obj1.toString());
 
         return obj1;
     }
@@ -423,11 +425,12 @@ class MyUtils {
     private static final String DENSITY_HDPI = "HDPI";
     public static final String DENSITY_XHDPI = "XHDPI";
     public static final String DENSITY_XXHDPI = "XXHDPI";
+
     public static float getDensity(Context context) {
-        float  d = context.getResources().getDisplayMetrics().density;
+        float d = context.getResources().getDisplayMetrics().density;
         String result = DENSITY_HDPI;
 
-        if(d == 0.75) {
+        if (d == 0.75) {
             result = "LDPI";
 
         } else if (d == 1.0) {
@@ -443,10 +446,9 @@ class MyUtils {
             result = "XXHDPI";
         }
 
-        if(DBG) Log.d(TAG, "getDensity : " + d + " - " + result);
+        if (DBG) Log.d(TAG, "getDensity : " + d + " - " + result);
         return d;
     }
-
 
 
     public static void printHashKey(Context pContext) {
@@ -459,10 +461,8 @@ class MyUtils {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String hashKey = new String(Base64.encode(md.digest(), 0));
-                if(DBG) Log.i(TAG, "printHashKey() Hash Key: " + hashKey);
+                if (DBG) Log.i(TAG, "printHashKey() Hash Key: " + hashKey);
             }
-        } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "printHashKey()", e);
         } catch (Exception e) {
             Log.e(TAG, "printHashKey()", e);
         }
@@ -471,11 +471,11 @@ class MyUtils {
     public static String getCustomizedUserAgent(Context context) {
         String deviceSpString = "SweetRing/" + getSoftwareVersion(context) + " ";
         deviceSpString += "(Android " + Build.VERSION.RELEASE;
-        deviceSpString+= "; " + context.getResources().getConfiguration().locale.toString();
-        deviceSpString+= "; " + Build.MODEL + " Build/" + Build.ID;
-        deviceSpString+= ")";
+        deviceSpString += "; " + context.getResources().getConfiguration().locale.toString();
+        deviceSpString += "; " + Build.MODEL + " Build/" + Build.ID;
+        deviceSpString += ")";
 
-        if(DBG) Log.i(TAG, "User-Agent: " + deviceSpString);
+        if (DBG) Log.i(TAG, "User-Agent: " + deviceSpString);
 
         return deviceSpString;
     }
@@ -485,14 +485,14 @@ class MyUtils {
         try {
 
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            if(DBG) Log.v(TAG, packageInfo.versionName);
-            appVersion= packageInfo.versionName;
+            if (DBG) Log.v(TAG, packageInfo.versionName);
+            appVersion = packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Package name not found", e);
         }
 
 
-        if(DBG) Log.i(TAG, "<< getSoftwareVersion: " + appVersion);
+        if (DBG) Log.i(TAG, "<< getSoftwareVersion: " + appVersion);
 
         return appVersion;
     }
