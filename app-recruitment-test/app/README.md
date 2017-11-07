@@ -1,0 +1,1 @@
+The iOS or Android project should be put into this directory
