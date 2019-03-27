@@ -11,15 +11,15 @@
 	<img src="images/video_for_demo.png">
 </a>
 
-<img src="images/Slide01.png">
-<img src="images/Slide02.png">
-<img src="images/Slide03.png">
-<img src="images/Slide04.png">
-<img src="images/Slide05.png">
-<img src="images/Slide06.png">
-<img src="images/Slide07.png">
-<img src="images/Slide08.png">
-<img src="images/Slide09.png">
+<img src="images/Slide1.png">
+<img src="images/Slide2.png">
+<img src="images/Slide3.png">
+<img src="images/Slide4.png">
+<img src="images/Slide5.png">
+<img src="images/Slide6.png">
+<img src="images/Slide7.png">
+<img src="images/Slide8.png">
+<img src="images/Slide9.png">
 <img src="images/Slide10.png">
 <img src="images/Slide11.png">
 <img src="images/Slide12.png">
